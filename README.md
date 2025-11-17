@@ -49,7 +49,7 @@ Tujuan sistem:
 | Load Cell | 4 |
 | HX711 | 1 |
 | RFID RC522 | 1 |
-| Kartu RFID | 1+ |
+| Kartu RFID | 1 |
 | Servo SG90 | 1 |
 | IR Sensor | 1 |
 | LCD I2C 20x4 | 1 |
