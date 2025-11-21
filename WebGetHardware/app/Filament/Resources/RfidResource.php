@@ -2,21 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\RfidResource\Pages;
-use App\Models\Rfid;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\Rfid;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Actions\DeleteAction;
+use App\Filament\Resources\RfidResource\Pages;
 
 class RfidResource extends Resource
 {
     protected static ?string $model = Rfid::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
-    protected static ?string $navigationLabel = 'RFID Cards';
-    protected static ?string $pluralModelLabel = 'RFID Cards';
+    protected static ?string $navigationLabel = 'Data RFID';
+    protected static ?string $navigationGroup = 'RFID';
 
     public static function form(Form $form): Form
     {
@@ -63,6 +64,7 @@ class RfidResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

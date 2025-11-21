@@ -10,40 +10,34 @@
 <table>
     <thead>
         <tr>
-            <th>Total Berat Bersih di Jetty:</th>
+            <th>Total Berat Bersih</th>
             <th>{{ number_format($totalNetAtJetty, 2, ',', '.') }} Kg</th>
-            <th>Jumlah Angkutan:</th>
+            <th>Jumlah Angkutan</th>
             <th>{{ number_format($totalMeasurements) }}</th>
         </tr>
         <tr>
-            <th>Kode Nomor Dermaga</th>
-            <th>Kode Nomor Tambang</th>
-            <th>Pengirim</th>
-            <th>Penerima</th>
-            <th>Jenis Batubara</th>
-            <th>Vendor</th>
             <th>Nomor Kendaraan</th>
-            <th>Gross Mine</th>
-            <th>Tare Mine</th>
-            <th>Gross Jetty</th>
-            <th>Tare Jetty</th>
-            <th>Jetty Entry Time</th>
+            <th>Nama Supir</th>
+            <th>Kartu RFID</th>
+            <th>Berat Kotor Tambang</th>
+            <th>Berat Kotor Jetty</th>
+            <th>Berat Tara</th>
+            <th>Berat Bersih</th>
+            <th>Losis</th>
+            <th>Waktu Masuk Jetty</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($measurements as $item)
             <tr>
-                <td>{{ $item->kode_no_dermaga }}</td>
-                <td>{{ $item->kode_no_tambang }}</td>
-                <td>{{ $item->pengirim }}</td>
-                <td>{{ $item->penerima }}</td>
-                <td>{{ $item->nama_barang }}</td>
-                <td>{{ $item->vendor }}</td>
                 <td>{{ $item->vehicle_number }}</td>
+                <td>{{ $item->owner_name }}</td>
+                <td>{{ $item->tag_id }}</td>
                 <td>{{ number_format($item->gross_at_mine, 2, ',', '.') }}</td>
-                <td>{{ number_format($item->tare_at_mine, 2, ',', '.') }}</td>
                 <td>{{ number_format($item->gross_at_jetty, 2, ',', '.') }}</td>
                 <td>{{ number_format($item->tare_at_jetty, 2, ',', '.') }}</td>
+                <td>{{ number_format($item->gross_at_jetty - $item->tare_at_jett, 2, ',', '.') }}</td>
+                <td>{{ number_format($item->gross_at_mine - $item->gross_at_jetty, 2, ',', '.') }}</td>
                 <td>{{ \Carbon\Carbon::parse($item->jetty_entry_time)->format('d-m-Y H:i:s') }}</td>
             </tr>
         @endforeach

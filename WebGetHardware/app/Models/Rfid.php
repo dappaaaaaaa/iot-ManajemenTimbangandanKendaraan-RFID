@@ -3,10 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 class Rfid extends Model
 {
+
     protected $table = 'rfids';
+
+    protected $primaryKey = 'id';
+
+    public $incrementing = true;
+
+    protected $keyType = 'int';
+
 
     protected $fillable = [
         'tag_id',
@@ -15,6 +25,11 @@ class Rfid extends Model
         'scanned_at',
         'status',
     ];
+    public function measurements(): HasMany
+    {
+        return $this->hasMany(Measurement::class);
+    }
+
 
     protected $casts = [
         'scanned_at' => 'datetime',

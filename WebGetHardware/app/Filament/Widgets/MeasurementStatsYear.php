@@ -13,9 +13,7 @@ class MeasurementStatsYear extends Widget implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?int $sort = 5;
-
-    protected int | string | array $columnSpan = 'full';
+    protected static ?int $sort = 2;
 
 
     protected static string $view = 'filament.widgets.measurement-stats-year';
@@ -35,10 +33,10 @@ class MeasurementStatsYear extends Widget implements HasForms
         $selectedYear = (int) $this->period;
 
         // Ambil tanggal 31 Desember tahun sebelumnya jam 16:00:00
-        $startDate = Carbon::create($selectedYear - 1, 12, 31, 16, 0, 0);
+        $startDate = Carbon::create($selectedYear)->startOfYear();
 
         // Ambil tanggal 31 Desember tahun ini jam 15:59:59
-        $endDate = Carbon::create($selectedYear, 12, 31, 15, 59, 59);
+        $endDate = Carbon::create($selectedYear)->endOfYear();
 
         // Hitung total net weight dari gross - tare
         $netWeight = DB::table('measurements')

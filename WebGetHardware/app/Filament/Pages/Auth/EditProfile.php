@@ -21,7 +21,6 @@ class EditProfile extends BaseEditProfile
         $this->form->fill([
             'name' => $this->getUser()->name,
             'email' => $this->getUser()->email,
-            'role' => $this->getRole(),
         ]);
     }
 
@@ -42,12 +41,6 @@ class EditProfile extends BaseEditProfile
                     ->label('Email address')
                     ->email()
                     ->required(),
-
-                Forms\Components\TextInput::make('role')
-                    ->label('Role')
-                    ->default(fn() => $this->getRole()) // penting
-                    ->disabled()
-                    ->dehydrated(false), // agar tidak ikut disimpan ke database
 
                 Forms\Components\TextInput::make('password')
                     ->label('New password')

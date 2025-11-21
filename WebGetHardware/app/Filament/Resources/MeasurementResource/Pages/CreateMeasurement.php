@@ -2,18 +2,17 @@
 
 namespace App\Filament\Resources\MeasurementResource\Pages;
 
-use App\Filament\Resources\MeasurementResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
-use Illuminate\Support\Facades\Auth;
+use App\Filament\Resources\MeasurementResource;
+use App\Helpers\GateHelper;
+use Illuminate\Support\Facades\Log;
 
 class CreateMeasurement extends CreateRecord
 {
     protected static string $resource = MeasurementResource::class;
 
-    protected function mutateFormDataBeforeCreate(array $data): array
-    {
-        $data['user_id'] = Auth::id(); // Simpan ID user yang sedang login
-        return $data;
-    }
+    // protected function afterCreate(): void
+    // {
+    //     $this->record->openGate();
+    // }
 }

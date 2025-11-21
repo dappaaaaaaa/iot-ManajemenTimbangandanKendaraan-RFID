@@ -1,7 +1,7 @@
 <x-filament::widget>
     <x-filament::card>
         <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-            <h2 class="text-lg font-bold whitespace-nowrap">Bulan Ini</h2>
+            <h2 class="text-lg font-bold whitespace-nowrap">Berat Bersih (Kg) </h2>
 
             <form wire:submit.prevent="updateDateRange" class="flex gap-3 items-end">
                 <div class="w-48">
@@ -21,7 +21,7 @@
         <div class="my-4 border-t"></div>
 
         <div class="text-center">
-            <h2 class="text-lg font-semibold">Berat Bersih (Kg)</h2>
+            <h2 class="text-lg font-semibold">Berat Bersih</h2>
             <p class="text-3xl font-bold text-primary-600 mt-2">
                 {{ number_format($netWeight, 0, ',', '.') }} Kg
             </p>

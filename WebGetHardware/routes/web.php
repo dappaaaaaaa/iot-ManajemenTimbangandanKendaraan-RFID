@@ -2,9 +2,11 @@
 
 use App\Models\Rfid;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RfidController;
+use App\Http\Controllers\MeasurementExportController;
+use App\Filament\Resources\DetailResource\Pages\ViewDetail;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -12,6 +14,14 @@ Route::get('/', function () {
     }
     return redirect('/admin/login');
 });
+
+Route::get('/export-pdf/{measurement}', [MeasurementExportController::class, 'exportAttachmentPdf'])
+    ->name('measurement.exportAttachmentPdf');
+
+Route::get('/detail/{tag}/export-pdf', [ViewDetail::class, 'exportPdf'])->name('detail.export.pdf');
+Route::get('/detail/{tag}/export-excel', [ViewDetail::class, 'exportExcel'])->name('detail.export.excel');
+
+
 
 // Group prefix 'rfid' untuk rute-rute terkait
 Route::prefix('rfid')->group(function () {

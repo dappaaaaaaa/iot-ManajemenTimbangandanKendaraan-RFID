@@ -14,7 +14,7 @@ class MeasurementStatsMonth extends Widget implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?int $sort = 3;
+    protected static ?int $sort = 1;
     protected static string $view = 'filament.widgets.measurement-stats-month';
 
     public $startDateTime;
@@ -22,9 +22,8 @@ class MeasurementStatsMonth extends Widget implements HasForms
 
     public function mount(): void
     {
-        // Default: 16:00 hari terakhir bulan lalu sampai 15:59:59 hari terakhir bulan ini
-        $this->startDateTime = Carbon::now()->subMonthNoOverflow()->endOfMonth()->setTime(16, 0, 0)->toDateTimeString();
-        $this->endDateTime = Carbon::now()->endOfMonth()->setTime(15, 59, 59)->toDateTimeString();
+        $this->startDateTime = Carbon::today()->startOfDay();
+        $this->endDateTime = Carbon::today()->endOfDay();
 
         $this->form->fill([
             'startDateTime' => $this->startDateTime,
@@ -34,8 +33,8 @@ class MeasurementStatsMonth extends Widget implements HasForms
 
     public function getFormSchema(): array
     {
-        $min = Carbon::now()->subyear()->setTime(16, 0);
-        $max = Carbon::now()->endOfMonth()->setTime(15, 59, 59);
+        $min = Carbon::now()->subyear()->setTime(0, 0);
+        $max = Carbon::now()->endOfMonth()->setTime(0, 0, 0);
 
         return [
             DateTimePicker::make('startDateTime')
@@ -59,8 +58,8 @@ class MeasurementStatsMonth extends Widget implements HasForms
             $start = Carbon::parse($this->startDateTime);
             $end = Carbon::parse($this->endDateTime);
         } catch (\Exception $e) {
-            $start = Carbon::now()->subMonthNoOverflow()->endOfMonth()->setTime(16, 0);
-            $end = Carbon::now()->endOfMonth()->setTime(15, 59, 59);
+            $start = Carbon::now()->subMonthNoOverflow()->endOfMonth()->setTime(0, 0);
+            $end = Carbon::now()->endOfMonth()->setTime(0, 0, 0);
         }
 
         $netWeight = DB::table('measurements')

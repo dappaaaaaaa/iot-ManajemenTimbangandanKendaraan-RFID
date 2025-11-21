@@ -33,13 +33,13 @@ class AdminPanelProvider extends PanelProvider
             ->profile(EditProfile::class)
 
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::hex('#dda15e'),
             ])
 
             ->resources([
                 \App\Filament\Resources\RfidResource::class,
-                \App\Filament\Resources\MeasurementResource::class, // <-- Tambahkan resource ini
-
+                \App\Filament\Resources\MeasurementResource::class,
+                \App\Filament\Resources\DetailResource::class
             ])
 
             ->pages([

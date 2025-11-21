@@ -15,7 +15,9 @@ class ManageRfids extends ManageRecords
     {
         return [
             Actions\CreateAction::make()
+                ->label('Tambah RFID')
                 ->after(function ($record, array $data) {
+                    // Hapus data pending setelah RFID berhasil ditambahkan
                     PendingRfidTag::where('tag_id', $data['tag_id'])->delete();
                 }),
         ];
